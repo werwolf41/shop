@@ -21,8 +21,8 @@ class m170608_091555_CreateProductsTable extends Migration
             'title'         =>  $this->string(70),
             'seodescription'=>  $this->string(300),
             'keywords'      => $this->string(),
-            'update_at'     =>  $this->timestamp(),
-            'create_at'     =>  $this->timestamp(),
+            'update_at'     =>  $this->timestamp()->null(),
+            'create_at'     =>  $this->timestamp()->null(),
         ], $tableOptions);
 
         $this->createIndex('idx_products_name', '{{%products}}', 'name');

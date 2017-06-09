@@ -20,8 +20,8 @@ class m170608_080602_CreateCategoryTable extends Migration
             'title'         => $this->string(70),
             'seoDescription'=> $this->string(300),
             'keywords'      => $this->string(),
-            'update_at'     => $this->timestamp(),
-            'create_at'     => $this->timestamp(),
+            'update_at'     => $this->timestamp()->defaultValue(null),
+            'create_at'     => $this->timestamp()->defaultValue(null),
         ], $tableOptions);
 
         $this->createIndex('idx_categories_parent_id', '{{%categories}}', 'parent_id');
