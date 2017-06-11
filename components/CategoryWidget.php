@@ -19,23 +19,30 @@ class CategoryWidget extends Widget
 {
 
     public $data = [];
-
+    public $tree='';
+/*
     public $items = [];
     public $labelTemplate = '{label}';
-    public $submenuTemplate = "\n<ul class=\"dropdown-menu\">\n{items}\n</ul>\n";
+    public $submenuTemplate = "\n<ul  id=\"menu-list\" class=\"dropdown-menu\">\n{items}\n</ul>\n";
     public $linkTemplate = '<a href="{url}">{label}</a>';
     public $linkSubTemplate = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true"><span class="badge pull-right"><i class="fa fa-plus"></i></span>{label}</a>';
-    public $linkSubmenuTemplate = '<a href="{url}"><span class="badge pull-right"><i class="fa fa-plus"></i></span>{label}</a>';
+    public $linkSubmenuTemplate = '<a href="{url}"><span class="badge pull-right"><i class="fa fa-plus"></i></span>{label}</a>';*/
 
+    public $lev0Item = '<li class=""><span class="toggle-child"><i class="fa fa-plus plus"></i><i class="fa fa-minus minus"></i></span><a class="with-child">{label} <span class="mobilink hidden-lg hidden-md" onclick="location.href=\'{url}\'"></span></a></li>';
+
+    public $lev1Item = '<li class=""><span class="toggle-child"><i class="fa fa-plus plus"></i><i class="fa fa-minus minus"></i></span><a class="with-child"><i class="fa fa-angle-right arrow"></i>{label} <span class="mobilink hidden-lg hidden-md" onclick="location.href=\'{url}\'"></span></a>{items}</li>';
+
+    public $lev2Item = '<div class="col-md-4"><div class="child-box-cell"><div class="h5"><span class="toggle-child2"><i class="fa fa-plus plus"></i><i class="fa fa-minus minus"></i></span>{label}</div>{items}</div></div>';
 
     public function run()
     {
         //get Cache
-        $menu  = \Yii::$app->cache->get('menuCategorySidebar');
-        if($menu) return $menu;
+      //  $menu  = \Yii::$app->cache->get('menuCategorySidebar');
+       // if($menu) return $menu;
         $this->data = Categories::find()->select(['id', 'name AS label', 'parent_id'])->indexBy('id')->asArray()->all();
-
-        $tree = $this->getTree();
+        $this->tree = $this->getTree();
+        return $this->renderItems();
+       return var_dump($this->getTree());$tree = $this->getTree();
 
         if (!empty($tree)) {
 
@@ -60,7 +67,7 @@ class CategoryWidget extends Widget
         return $tree;
     }
 
-    protected function renderItems($items)
+  /*  protected function renderItems($items)
     {
         $lines = [];
         foreach ($items as $item) {
@@ -107,8 +114,50 @@ class CategoryWidget extends Widget
                 '{label}' => $item['label'],
             ]);
         }
-    }
+    }*/
 
+    protected function renderItems(){
+        $items1='';
+        foreach ($this->tree as  $level1) {
+            if (!empty($level1['items'])) {
+                $i=0;
+                foreach ($level1['items'] as $level2) {
+                    if (!empty($level2['items'])) {
+                        $items3='';
+                        foreach ($level2['items'] as $level3) {
+                           $items3 .= Html::tag('li', 
+                            Html::a($level3['label'], 
+                                Url::to(['site/category', 'id'=>$level3['id']])));
+                        }
+                        $items3 = Html('ul', $items3, ['class'=>'child2-box']);
+                    }
+
+                    $items2 .=strtr($this->lev2Item, [
+                        '{label}'=>$level2['label'],
+                        '{items}'=>$level3,
+                        ]);
+                    if (($i % 3) == 0 ) {
+                        $items2 .= Html::tag('div', '', ['class'=>'clearfix visible-md visible-lg']);
+                    }
+                }
+
+                $items2 = Html::tag('div',
+                    Html::tag('div', $items2, ['class'=>'row']) ,['class'=>'child-box box-col-3']);
+
+                $items1 .= strtr($this->lev1Item, [
+                    '{label}'=>$level1['label'],
+                    '{url}'=>Url::to('site/category', ['id'=>$level1['id']]),
+                    '{items}'=>$items2,
+                    ]);
+            }else{
+                $items1 .= strtr($this->lev0Item, [
+                    '{label}'=>$level1['label'],
+                    '{url}'=>Url::to('site/category', ['id'=>$level1['id']]),
+                    ]);
+            }
+        }
+        return Html::tag('ul', $items1, ['id'=>'menu-list', 'class'=>'dropdown-menu']);
+    }
 
 
 }
