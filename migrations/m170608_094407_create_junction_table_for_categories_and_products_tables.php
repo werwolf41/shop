@@ -16,11 +16,15 @@ class m170608_094407_create_junction_table_for_categories_and_products_tables ex
      */
     public function up()
     {
+        if ($this->db->driverName === 'mysql') {
+            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%categories_products}}', [
             'categories_id' => $this->integer(),
             'products_id' => $this->integer(),
             'PRIMARY KEY(categories_id, products_id)',
-        ]);
+        ], $tableOptions);
 
         // creates index for column `categories_id`
         $this->createIndex(

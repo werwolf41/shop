@@ -116,7 +116,7 @@ label{
 .col-show-button{
     margin-bottom: 20px;
 }
-.common-home .col-show-button{
+.site-index .col-show-button{
     display: none!important;
 }
 
@@ -179,8 +179,8 @@ label{
     .hid-col-rigth.show{
         display: block;
     }
-    .common-home .hid-col-left,
-    .common-home .hid-col-right{
+    .site-index .hid-col-left,
+    .site-index .hid-col-right{
         display: block;
     }
 }
@@ -613,10 +613,10 @@ a:hover .list-group-icon{
 #menu:active{
     box-shadow: none;
 }
-.common-home #menu:active{
+.site-index #menu:active{
     box-shadow: 0 6px 12px rgba(0,0,0,0.175);
 }
-.common-home .btn-menu:active{
+.site-index .btn-menu:active{
     box-shadow: none;
 }
 
@@ -1030,14 +1030,14 @@ a:hover .list-group-icon{
     #menu #menu-list > li .child-box  a:hover{
         background: none;
     }
-    .common-home #menu #menu-list{
+    .site-index #menu #menu-list{
         display: block;
     }
     #menu-home-helper {
         display: block;
         margin-bottom: 20px;
     }
-    .common-home #menu .btn-menu{
+    .site-index #menu .btn-menu{
         border-radius: 5px 5px 1px 1px;
     }
     .box-col-3{width: 331.2%;}
@@ -1911,7 +1911,7 @@ form > .buttons{
 }
 
 @media (min-width: 1200px) {
-    .common-home .slideshow .nivoSlider{
+    .site-index .slideshow .nivoSlider{
         left: auto;
         margin-left: 0;
         width: auto;

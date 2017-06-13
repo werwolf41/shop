@@ -26,7 +26,8 @@ AppAsset::register($this);
     <?php $this->head() ?>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="common-home"> <!--Класс меняется-->
+
+<body class="<?=str_replace('/', '-',\Yii::$app->controller->route);?>"> <!--Класс меняется-->
 <?php $this->beginBody() ?>
 
 <header>
@@ -256,7 +257,7 @@ AppAsset::register($this);
     <div id="footer-map" >
         <div class="container">
             <div class="map-content ">
-                <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=Nz0Q_oY0plOC0oFIenIzYExB59xTSujy&width=600&height=240"></script>		<div class="btn-group close-map">
+               <!-- <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=Nz0Q_oY0plOC0oFIenIzYExB59xTSujy&width=600&height=240"></script>	-->	<div class="btn-group close-map">
                     <button type="button" class="btn btn-danger" onclick="toogleMap()"><i class="fa fa-times"></i> Закрыть</button>
                 </div>
                 <div class="glass"></div>

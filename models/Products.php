@@ -18,4 +18,9 @@ class Products extends ActiveRecord
     {
         return $this->hasMany(CategoriesProducts::className(), ['products_id'=>'id']);
     }
+
+    public function getManufacturer()
+    {
+        return $this->hasOne(Manufacturers::className(), ['id'=>'manufacturer_id']);
+    }
 }
