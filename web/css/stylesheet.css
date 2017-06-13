@@ -557,7 +557,7 @@ a:hover .list-group-icon{
 #cart .products, #cart .prices{
     line-height: 32px;
     font-size: 14px;
-    white-space: no-wrap;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline;
@@ -1023,7 +1023,7 @@ a:hover .list-group-icon{
         border-top: none;
     }
     #menu #menu-list > li .child-box-cell .child2-box a{
-        display: illine;
+        display: inline;
         padding: 0;
         line-height: 1.42857143;
     }
@@ -1927,7 +1927,7 @@ form > .buttons{
     width: 100%;
     font-size: 0;
     line-height: 0;
-    letter-spacing: -1;
+  /*  letter-spacing: -1;*/
 }
 @media (min-width: 992px) {
     .slideshow .nivo-controlNav{

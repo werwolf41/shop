@@ -166,11 +166,11 @@ class SiteController extends Controller
 
     public function actionCategory()
     {
-        $id = Yii::$app->request->get('id');
+        $id = (int)Yii::$app->request->get('id');
 
         $conditions =  $this->getConditions();
 
-        $category = Categories::find()->where($id)->with(['children'])->one();
+        $category = Categories::find()->where(['id'=>$id])->with(['children'])->one();
 
         $models = Products::find()
             ->select('{{%products}}.*')
@@ -194,7 +194,7 @@ class SiteController extends Controller
             ->all();
 
 
-        return $this->render('category', compact('category', 'products', 'pages', $conditions));
+        return $this->render('category', compact('category', 'products', 'pages', 'conditions'));
     }
 
     public function actionProduct()

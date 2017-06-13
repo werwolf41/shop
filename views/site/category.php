@@ -503,12 +503,12 @@ use app\components\CountPagesWidget;
 
         <div class="red-links">
             <div class="pull-left"><img src="http://coloring.xds.by/demo/oc_2.3.x/image/cache/catalog/demo/compaq_presario-80x80.jpg" alt="Компьютеры" title="Компьютеры" class="img-thumbnail" style="margin: 0 10px 5px 0"></div>
-            <p>
-                Example of category description text</p>
+            <p><?= $category->description; ?></p>
             <div class="clearfix"></div>
         </div>
     </div>
 </div>
+
 
 <script type="application/javascript">
 
